@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Your Attack Graphs</h1>
+<a href="{% url 'graph_create' %}">Create New</a>
+<ul>
+  {% for g in graphs %}
+  <li>
+    <a href="{% url 'graph_editor' g.id %}">{{ g.title }}</a>
+    — {{ g.visibility }} — updated {{ g.updated_at|date:"Y-m-d H:i" }}
+  </li>
+  {% empty %}
+  <li>No graphs yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

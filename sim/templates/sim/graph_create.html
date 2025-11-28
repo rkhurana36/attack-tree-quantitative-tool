@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Graph</title>
+</head>
+<body>
+  <h1>Create a New Graph</h1>
+  <form method="post">
+    {% csrf_token %}
+    <p>
+      <label>Title:</label><br>
+      <input type="text" title="title" style="width: 300px;">
+    </p>
+    <p>
+      <label>Description:</label><br>
+      <textarea name="description" rows="4" cols="40"></textarea>
+    </p>
+    <button type="submit">Create Graph</button>
+  </form>
+</body>
+</html>

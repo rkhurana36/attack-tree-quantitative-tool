@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>{{ graph_title }}</title>
+  <style>
+    html, body, #root { height: 100%; margin: 0; }
+  </style>
+
+  <script>
+    window.GRAPH_ID = "{{ graph_id }}";
+    window.CSRF_TOKEN = "{{ csrf_token }}";
+  </script>
+
+</head>
+<body>
+<div id="root"></div>
+
+{% if FRONTEND_DEV %}
+  <!-- DEV MODE: Vite server + React Refresh patch -->
+  <script type="module" src="http://localhost:5173/@vite/client"></script>
+
+  <script type="module">
+      import RefreshRuntime from "http://localhost:5173/@react-refresh";
+      RefreshRuntime.injectIntoGlobalHook(window);
+      window.$RefreshReg$ = () => {};
+      window.$RefreshSig$ = () => (type) => type;
+      window.__vite_plugin_react_preamble_installed__ = true;
+
+      console.log("Dev load: editor main.tsx");
+      import("http://localhost:5173/src/main.tsx");
+  </script>
+
+{% else %}
+  <!-- PRODUCTION MODE -->
+  {% load vite_tags %}
+  {% vite_files 'main.tsx' %}
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Your Scenarios</h1>
+<a href="{% url 'scenario_create' %}">Create New</a>
+<ul>
+  {% for g in scenarios %}
+  <li>
+    <a href="{% url 'scenario_editor' g.id %}">{{ g.title }}</a>
+    — {{ g.visibility }} — updated {{ g.updated_at|date:"Y-m-d H:i" }}
+  </li>
+  {% empty %}
+  <li>No scenarios yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
